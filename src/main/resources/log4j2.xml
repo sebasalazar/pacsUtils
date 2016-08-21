@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <!-- Archivo principal -->
+        <RollingFile name="ROOT_CLIMPS" 
+                     fileName="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}pacs.log" 
+                     filePattern="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}pacs.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <PatternLayout pattern="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; (%t) %m%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+
+        <!-- DEBUG -->
+        <RollingFile name="DEBUG_CLIMPS" 
+                     fileName="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}debug.log" 
+                     filePattern="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}debug.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; {%C->%M} %m%n" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+        
+        <!-- ERROR -->
+        <RollingFile name="ERROR_CLIMPS" 
+                     fileName="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}error.log" 
+                     filePattern="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}error.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{dd/MM/yyyy HH:mm:ss,SSS}] {%C->%M} %m%n" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+
+        <!-- INFO -->
+        <RollingFile name="INFO_CLIMPS" 
+                     fileName="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}info.log" 
+                     filePattern="${sys:java.io.tmpdir}${sys:file.separator}pacs${sys:file.separator}cli${sys:file.separator}info.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; %m%n" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="cl.medipacs" level="DEBUG">
+            <AppenderRef ref="INFO_CLIMPS" />
+            <AppenderRef ref="ERROR_CLIMPS" />
+            <AppenderRef ref="DEBUG_CLIMPS" />
+        </Logger>
+
+        <Root level="ERROR">
+            <AppenderRef ref="ROOT_CLIMPS"/>
+        </Root>
+    </Loggers>
+</Configuration>
