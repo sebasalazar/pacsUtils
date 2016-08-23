@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class DbServiceImpl implements DbService, Serializable {
                     if (StringUtils.isNotBlank(data)) {
                         LOGGER.info(String.format("# ID: '%d' # Datos: '%s' #", id, data));
                         attributes.add(data);
+                        DataUtils.createDcmFile(id, attrs);
                     }
                 }
                 rs.close();

@@ -193,6 +193,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons.lang3.version}</version>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>commons-codec</groupId>
@@ -245,6 +252,5 @@
             <artifactId>threetenbp</artifactId>
             <version>${threetenbp.version}</version>
         </dependency>
-        
     </dependencies>
 </project>
